@@ -9,11 +9,13 @@ ids = [panel['panelId'] for panel in lights.panel_positions]
 
 
 def get_animdata_to_color_all(r, g, b, w, t):
-    num_frames = "1 "
+    num_frames = "1"
     panel_frames = [" ".join(map(str, [id, num_frames, r, g, b, w, t])) for id in ids]
     num_panels = str(len(ids))
     return num_panels + " " + " ".join(panel_frames)
 
+def panel_ids_l2r():
+    x_positions = [ panel['x']:panel['panelId'] for panel in lights.panel_positions ]
 
 def send(animData):
     print(animData)
@@ -41,6 +43,8 @@ def update_clock():
     colors = time_to_colors(datetime.now())
     send(get_animdata_to_color_all(*colors['seconds']))
 
+
+
 while True:
     update_clock()
-    sleep(1)
+    sleep(0.5)
